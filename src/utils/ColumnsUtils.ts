@@ -1,6 +1,6 @@
 import {ColumnRules, OptionTypes} from "../interfaces/mod.ts";
 import {ErrorWithHint} from "../errors/mod.ts";
-import {parse} from "https://deno.land/std@0.144.0/datetime/mod.ts";
+import {parse} from "../../deps/deps.ts";
 
 export class ColumnsUtils<T> {
     constructor(

@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@deps": "./deps/deps.ts",
     "@core": "./src/mod.ts",
     "@core/classes": "./src/classes/mod.ts",
     "@core/decorators": "./src/decorators/mod.ts",

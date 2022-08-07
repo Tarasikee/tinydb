@@ -1,4 +1,4 @@
-import { ensureDir } from "https://deno.land/std@0.78.0/fs/mod.ts";
+import { ensureDir } from "@deps"
 
 export class FileUtils {
     static writeJson<T>(path: string, data: Record<string, unknown> | Array<T | never>): string {
