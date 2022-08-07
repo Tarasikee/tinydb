@@ -2,6 +2,7 @@ export class ObjectUtils {
   // deno-lint-ignore no-explicit-any
   static nestedCheck<T extends Record<string, any>>(obj: T, key: keyof T, value: any): boolean {
 
+    // TODO: changeeeeeees
     if (typeof obj[key] === "boolean" && typeof value === "boolean") {
       return obj[key] === value
     }

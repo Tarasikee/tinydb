@@ -3,6 +3,6 @@ export class ErrorWithHint extends Error {
         super(`
             Message: ${message}
             Hint: ${hint}
-        `);
+        `)
     }
 }

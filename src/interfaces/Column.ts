@@ -1,14 +1,14 @@
-export type OptionTypes = "string" | "number" | "boolean" | "date" | "json" | "array";
+export type OptionTypes = "string" | "number" | "boolean" | "date" | "json" | "array"
 
 export interface ColumnProps {
-  unique?: boolean;
-  type?: OptionTypes;
-  allowNull?: boolean;
+  unique?: boolean
+  type?: OptionTypes
+  allowNull?: boolean
   // deno-lint-ignore no-explicit-any
-  default?: any;
+  default?: any
 }
 
 export interface ColumnRules {
-  name: string;
-  options: ColumnProps;
+  name: string
+  options: ColumnProps
 }
