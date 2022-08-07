@@ -1,4 +1,4 @@
-![](images/Logo1.png)
+![](https://raw.githubusercontent.com/Tarasikee/tinydb/v1.0.0-alpha/images/Logo1.png)
 
 # TinyDB
 Tiny, Powerful, Beautiful
