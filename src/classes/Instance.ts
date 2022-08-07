@@ -20,11 +20,11 @@ export class Instance<T extends { _id: string }> {
 
   public delete() {
     const db = FileUtils.readJson<T>("./database/db.json")
-    const filtered_table = db[this._schema.name]
+    const filteredTable = db[this._schema.name]
       .filter(row => row._id !== this._fields._id)
     FileUtils.writeJson("./database/db.json", {
       ...db,
-      [this._schema.name]: filtered_table
+      [this._schema.name]: filteredTable
     })
   }
 
@@ -32,14 +32,14 @@ export class Instance<T extends { _id: string }> {
     const db = FileUtils.readJson<T>("./database/db.json")
 
     if (!this._options.isNew) {
-      const filtered_table = db[this._schema.name]
+      const filteredTable = db[this._schema.name]
         .filter(row => row._id !== this._fields._id)
 
-      new ColumnsUtils(this._schema.columns, filtered_table, this._fields)
-      filtered_table.push(this._fields)
+      new ColumnsUtils(this._schema.columns, filteredTable, this._fields)
+      filteredTable.push(this._fields)
       FileUtils.writeJson("./database/db.json", {
           ...db,
-          [this._schema.name]: filtered_table
+          [this._schema.name]: filteredTable
         }
       )
     } else {

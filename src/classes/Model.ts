@@ -29,11 +29,11 @@ export class Model<T extends { _id: string }> {
     const table = db[this.schema.name] ?? []
     const keys = Object.keys(args) as unknown as Array<keyof T>
 
-    const filtered_table = table.filter(row =>
+    const filteredTable = table.filter(row =>
       keys.every(key =>
         ObjectUtils.nestedCheck(row, key, args[key])))
 
-    return filtered_table.map(row => new Instance<T>(this.schema, row, {
+    return filteredTable.map(row => new Instance<T>(this.schema, row, {
       isNew: false
     }))
   }
