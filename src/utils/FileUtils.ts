@@ -1,4 +1,4 @@
-import { ensureDir } from "@deps"
+import { ensureDirSync } from "../../deps/deps.ts"
 
 export class FileUtils {
     static writeJson<T>(path: string, data: Record<string, unknown> | Array<T | never>): string {
@@ -10,9 +10,9 @@ export class FileUtils {
         }
     }
 
-    static async isFileExists(path: string): Promise<boolean> {
+    static isFileExists(path: string): boolean {
         try {
-            await Deno.stat(path);
+            Deno.statSync(path);
             return true;
         } catch (e) {
             console.log(e.message)
@@ -20,9 +20,9 @@ export class FileUtils {
         }
     }
 
-    static async createOrCheckDir(path: string): Promise<string> {
+    static createOrCheckDir(path: string): string {
         try {
-            await ensureDir(path);
+            ensureDirSync(path);
             return "Created directory " + path;
         } catch (e) {
             return e.message;

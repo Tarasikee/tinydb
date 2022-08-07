@@ -1,5 +1,5 @@
 import {Reflect} from "https://deno.land/x/reflect_metadata@v0.1.12/mod.ts";
-import {ColumnProps} from "../interfaces/IColumn.ts";
+import {ColumnProps} from "../interfaces/Column.ts";
 
 const formatMetadataKey = Symbol("columns");
 

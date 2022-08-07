@@ -1,10 +1,5 @@
 {
   "imports": {
-    "@deps": "./deps/deps.ts",
-    "@core": "./src/mod.ts",
-    "@core/classes": "./src/classes/mod.ts",
-    "@core/decorators": "./src/decorators/mod.ts",
-    "@core/utils": "./src/utils/mod.ts",
-    "@core/errors": "./src/errors/mod.ts"
+    "@tinydb": "./mod.ts"
   }
 }

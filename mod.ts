@@ -1,1 +1,1 @@
-export { foo } from "./src/index.ts";
+export * from "./src/mod.ts"
