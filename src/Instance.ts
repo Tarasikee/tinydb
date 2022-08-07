@@ -23,7 +23,6 @@ export class Instance<T extends { _id: string }> {
         const db = FileUtils.readJson<T>("./database/db.json")
         const filtered_table = db[this._schema.name]
             .filter(row => row._id !== this._fields._id)
-      
         FileUtils.writeJson("./database/db.json", {
             ...db,
             [this._schema.name]: filtered_table
