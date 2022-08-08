@@ -1,28 +1,32 @@
 import {FileUtils} from "../mod.ts"
 
 export class Table {
-    public static init(name: string) {
-        try {
-            const isExists = FileUtils.isFileExists("./database/db.json")
+  public static init(name: string) {
+    const url = `./database/${name}.json`
 
-            if (isExists) {
-                return this
-            }
+    try {
+      const isExists = FileUtils.isFileExists(url)
 
-            FileUtils.createOrCheckDir("./database")
-            FileUtils.writeJson("./database/db.json", {[name]: []})
-            return this
-        } catch (e) {
-            console.error(e.message)
-        }
+      if (isExists) {
+        return this
+      }
+
+      FileUtils.createOrCheckDir("./database")
+      FileUtils.writeJson(url, [])
+      return this
+    } catch (e) {
+      console.error(e.message)
     }
+  }
 
-    public static nuke(name: string) {
-        try {
-            FileUtils.writeJson("./database/db.json", {[name]: []})
-            return 'Nuke\'em'
-        } catch (e) {
-            console.error(e.message)
-        }
+  public static nuke(name: string) {
+    const url = `./database/${name}.json`
+
+    try {
+      FileUtils.writeJson(url, [])
+      return "Nuke'em"
+    } catch (e) {
+      console.error(e.message)
     }
+  }
 }

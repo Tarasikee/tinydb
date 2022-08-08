@@ -7,7 +7,8 @@ interface InstanceOptions {
 export class Instance<T extends { _id: string }> {
   constructor(private _schema: Schema,
               private _fields: T,
-              private _options: InstanceOptions) {
+              private _options: InstanceOptions
+  ) {
   }
 
   set fields(value: T) {
@@ -18,40 +19,38 @@ export class Instance<T extends { _id: string }> {
     return this._fields
   }
 
+  private getTable(): T[] {
+    const url = `./database/${this._schema.name}.json`
+    return FileUtils.readJson<T>(url)
+  }
+
+  private writeTable(table: T[]) {
+    const url = `./database/${this._schema.name}.json`
+    FileUtils.writeJson(url, [...table])
+  }
+
   public delete() {
-    const db = FileUtils.readJson<T>("./database/db.json")
-    const filteredTable = db[this._schema.name].filter(row => row._id !== this._fields._id)
-    
-    FileUtils.writeJson("./database/db.json", {
-      ...db,
-      [this._schema.name]: filteredTable
-    })
+    const filteredTable = this
+      .getTable()
+      .filter(row => row._id !== this._fields._id)
+
+    this.writeTable([...filteredTable])
   }
 
   public save() {
-    const db = FileUtils.readJson<T>("./database/db.json")
+    const table = this.getTable()
 
-    if (!this._options.isNew) {
-      const filteredTable = db[this._schema.name]
-        .filter(row => row._id !== this._fields._id)
-
-      new ColumnsUtils(this._schema.columns, filteredTable, this._fields)
-      filteredTable.push(this._fields)
-      FileUtils.writeJson("./database/db.json", {
-          ...db,
-          [this._schema.name]: filteredTable
-        }
-      )
-    } else {
-      const table = db[this._schema.name] ?? []
-
+    if (this._options.isNew) {
       new ColumnsUtils(this._schema.columns, table, this._fields)
       table.push({...this._fields, _id: crypto.randomUUID()})
-      FileUtils.writeJson("./database/db.json", {
-          ...db,
-          [this._schema.name]: table
-        }
-      )
+      
+      this.writeTable([...table])
+    } else {
+      const filteredTable = table.filter(row => row._id !== this._fields._id)
+      new ColumnsUtils(this._schema.columns, filteredTable, this._fields)
+      filteredTable.push(this._fields)
+
+      this.writeTable([...filteredTable])
     }
   }
 }

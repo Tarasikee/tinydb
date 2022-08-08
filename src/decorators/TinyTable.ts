@@ -6,6 +6,7 @@ export function TinyTable(name: string) {
   return function <T extends { new(...args: any[]): Record<string, any> }>(Constructor: T) {
     return class extends Constructor {
       _tableName: string = name
+      _url: string = name
       _id!: string
 
       // deno-lint-ignore no-explicit-any

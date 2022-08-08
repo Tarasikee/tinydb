@@ -7,19 +7,17 @@ export class Model<T extends { _id: string }> {
   }
 
   private getTable(): T[] {
-    const db = FileUtils.readJson<T>("./database/db.json")
-    return db[this.schema.name] ?? []
+    const url = `./database/${this.schema.name}.json`
+    return FileUtils.readJson<T>(url)
   }
 
 
   // Creators
-
   public create(args: T) {
     return new Instance(this.schema, args, {isNew: true})
   }
 
   // Finders
-
   public findById(_id: string) {
     const table = this.getTable()
     const candidate = table.find(row => row._id === _id)
