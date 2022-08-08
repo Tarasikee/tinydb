@@ -28,7 +28,7 @@ jobs:
         run: deno cache ./deps/deps.ts --unstable
 
       - name: Run Tests
-        run: deno test/mod.ts -A --unstable
+        run: deno test ./tests/mod.ts -A --unstable
 
       - name: Lint files
         run: deno lint --unstable
