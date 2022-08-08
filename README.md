@@ -1,9 +1,7 @@
 ![](https://raw.githubusercontent.com/Tarasikee/tinydb/v1.0.0-alpha/images/Logo1.png)
 
 <img src="https://github.com/Tarasikee/tinydb/actions/workflows/ci.yml/badge.svg" alt="CI status" />
-&nbsp;
 <img src="https://github.com/Tarasikee/tinydb/actions/workflows/codeql-analysis.yml/badge.svg" alt="CODEql analysis" />
-&nbsp;
 <a href="https://deno.land/x/tinydb" target="_blank">
   <img width="20" src="https://deno.land/logo.svg" alt="Deno link"/>
 </a>
