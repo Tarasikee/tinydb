@@ -3,6 +3,7 @@ import {userDocument, userModel} from "./userInitiale.ts"
 import {faker, format} from "../deps/deps.ts"
 import TestContext = Deno.TestContext
 
+
 Deno.test("database", async (t: TestContext) => {
   await t.step("Create users using userModel, skipping types check with `as` keyword",
     () => {
