@@ -2,18 +2,18 @@ name: CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
 
     strategy:
       matrix:
-        deno: ["v1.x", "nightly"]
-        os: [macOS-latest, windows-latest, ubuntu-latest]
+        deno: [ "v1.x", "nightly" ]
+        os: [ macOS-latest, windows-latest, ubuntu-latest ]
 
     steps:
       - name: Setup repo
@@ -25,4 +25,7 @@ jobs:
           deno-version: "1.23.1"
 
       - name: Run Tests
-        run: deno test ./tests/mod.ts --unstable --import-map=import_map.json --allow-read --allow-write
+        run: deno test ./tests/mod.ts -A --unstable
+
+      - name: Lint files
+        run: deno lint --unstable
