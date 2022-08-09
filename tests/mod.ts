@@ -1,14 +1,13 @@
 import {userDocument, userModel} from "./userInitiale.ts"
 
-import {faker, format} from "../deps/deps.ts"
-import TestContext = Deno.TestContext
+import {faker, format, assertThrows} from "../deps/deps.ts"
 
 
-Deno.test("database", async (t: TestContext) => {
-  await t.step("Create users using userModel, skipping types check with `as` keyword",
+Deno.test("database", () => {
+  assertThrows(
     () => {
-      const users = [...Array(200).keys()].map(() => userModel.create({
-        name: faker.name.firstName() + " " + faker.name.lastName(),
+      const users = [...Array(1300).keys()].map(() => userModel.create({
+        name: faker.name.firstName(),
         birthday: format(faker.date.past(), "yyyy-MM-dd"),
         isAdmin: faker.random.boolean(),
         settings: {
@@ -19,6 +18,8 @@ Deno.test("database", async (t: TestContext) => {
 
 
       users.map(user => user.save())
-    }
-  )
+    },
+    Error,
+    "Message: name must be unique"
+  );
 })
