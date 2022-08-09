@@ -8,21 +8,21 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
         deno: ["v1.x", "nightly"]
-        os: [macOS-latest, windows-latest]
+        os: [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
       - name: Setup repo
         uses: actions/checkout@v2
 
       - name: Setup Deno
-        uses: denolib/setup-deno@v2.3.0
+        uses: denoland/setup-deno@v1
         with:
-          deno-version: ${{ matrix.deno }}
+          deno-version: "1.23.1"
 
       - name: Run Tests
         run: deno test ./tests/mod.ts --unstable --import-map=import_map.json --allow-read --allow-write
