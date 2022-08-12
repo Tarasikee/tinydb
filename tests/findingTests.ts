@@ -34,8 +34,8 @@ export const findingTests = () => {
         })
 
         await t.step("Find one or first user", () => {
-            const user = userModel.findOne({isAdmin: true})
-            assertStrictEquals(user.toJSON().isAdmin, true)
+            const user = userModel.findOne({settings: {test: 1}})
+            assertStrictEquals(user.toJSON().settings.test, 1)
         })
 
         await t.step("Find users with nested searching 1", () => {

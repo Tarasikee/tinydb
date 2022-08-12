@@ -18,24 +18,32 @@ Tiny, Powerful, Beautiful
 
 - [Motivation](#motivation)
 - [Let's start](#lets-start)
+- [@TinyTable](#lets-start)
+- [@Column](#lets-start)
 
 # Motivation
 
-Let's say you want to build a small project that doesn't require a bulky relational database such as Postgres or MySQL.
+Let's say you want to build a small project that doesn't require a bulky 
+relational database such as Postgres or MySQL.
 Instead, you want to use a simple, in-memory database that will cover your needs.
 
-That's where <b>TinyDB</b> comes in. <b>TinyDB</b>  is a tiny, simple, and fast in-memory database that you can use to
-store and retrieve data. It has all the features of a relational database, but it designed to be as lightweight and
+That's where <b>TinyDB</b> comes in. <b>TinyDB</b>  is a tiny, simple, 
+and fast in-memory database that you can use to
+store and retrieve data. It has all the features of a relational database, 
+but it designed to be as lightweight and
 simple as possible.
 
-No need to install software or to set up a server. You're ready to go after installing dependencies.
+No need to install software or to set up a server. You're ready to go after
+installing dependencies.
 
 # Let's start
 
 Your entry point is ```@TinyTable``` decorator, where you pass table's name.
 
-There are tons of decorators you can use to customize your database. In the example below, you can see ```@Column```
-decorators.
+No need to remember ton of decorators. Simply start with ```@Column({})```, add a 
+small bunch of properties, 
+and you are ready to go.
+In the example below you will see the best way to use create user with TinyDB.
 
 ```typescript
 @TinyTable("users")
