@@ -1,5 +1,5 @@
 import {ColumnRules, OptionTypes} from "../interfaces/mod.ts"
-import {ErrorWithHint} from "../errors/mod.ts"
+import {ErrorWithHint, ErrorWithMessage} from "../errors/mod.ts"
 import {parse} from "../../deps/deps.ts"
 
 export class ColumnsUtils<T> {
@@ -18,22 +18,22 @@ export class ColumnsUtils<T> {
       try {
         return parse(String(value), "yyyy-MM-dd")
       } catch (_) {
-        throw new Error(`${columnName} must be data`)
+        throw new ErrorWithMessage(`${columnName} must be date`)
       }
     }
 
     if (checkType === "array") {
-      if (!Array.isArray(value)) throw new Error(`${columnName} must be array`)
+      if (!Array.isArray(value)) throw new ErrorWithMessage(`${columnName} must be array`)
       return
     }
 
     if (checkType === "json") {
       if (typeof value === "object" && !Array.isArray(value) && value !== null) return
-      throw new Error(`${columnName} must be json`)
+      throw new ErrorWithMessage(`${columnName} must be json`)
     }
 
     if (valueType !== checkType) {
-      throw new Error(`${columnName} must be ${checkType}`)
+      throw new ErrorWithMessage(`${columnName} must be ${checkType}`)
     }
   }
 

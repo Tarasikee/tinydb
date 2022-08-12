@@ -28,6 +28,11 @@ export class Instance<T extends { _id: string }> {
     const url = `./database/${this._schema.name}.json`
     FileUtils.writeJson(url, [...table])
   }
+  
+  public toJSON(): T {
+    console.log(this._fields)
+    return this._fields
+  }
 
   public delete() {
     const filteredTable = this
@@ -42,8 +47,8 @@ export class Instance<T extends { _id: string }> {
 
     if (this._options.isNew) {
       new ColumnsUtils(this._schema.columns, table, this._fields)
-      table.push({...this._fields, _id: crypto.randomUUID()})
-      
+      table.push({...this._fields, _id: this._fields._id || crypto.randomUUID()})
+
       this.writeTable([...table])
     } else {
       const filteredTable = table.filter(row => row._id !== this._fields._id)

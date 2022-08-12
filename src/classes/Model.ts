@@ -10,8 +10,7 @@ export class Model<T extends { _id: string }> {
     const url = `./database/${this.schema.name}.json`
     return FileUtils.readJson<T>(url)
   }
-
-
+  
   // Creators
   public create(args: T) {
     return new Instance(this.schema, args, {isNew: true})
