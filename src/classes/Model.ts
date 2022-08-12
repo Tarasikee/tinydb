@@ -1,67 +1,67 @@
 import {Schema, Instance, FileUtils, ObjectUtils} from "../mod.ts"
 
 export class Model<T extends { _id: string }> {
-  constructor(
-    private schema: Schema
-  ) {
-  }
-
-  private getTable(): T[] {
-    const url = `./database/${this.schema.name}.json`
-    return FileUtils.readJson<T>(url)
-  }
-  
-  // Creators
-  public create(args: T) {
-    return new Instance(this.schema, args, {isNew: true})
-  }
-
-  // Finders
-  public findById(_id: string) {
-    const table = this.getTable()
-    const candidate = table.find(row => row._id === _id)
-
-    if (candidate === undefined) {
-      throw new Error("No record found")
+    constructor(
+        private schema: Schema
+    ) {
     }
 
-    return new Instance<T>(this.schema, candidate, {
-      isNew: false
-    })
-  }
+    private getTable(): T[] {
+        const url = `./database/${this.schema.name}.json`
+        return FileUtils.readJson<T>(url)
+    }
 
-  public find(args: Partial<T>) {
-    const table = this.getTable()
-    const keys = Object.keys(args) as unknown as Array<keyof T>
+    // Creators
+    public create(args: Partial<T>) {
+        return new Instance(this.schema, args as T, {isNew: true})
+    }
 
-    return table
-      .filter(row => keys.every(key => ObjectUtils.nestedCheck(row, key, args[key])))
-      .map(row => new Instance<T>(this.schema, row, {isNew: false}))
-  }
+    // Finders
+    public findById(_id: string) {
+        const table = this.getTable()
+        const candidate = table.find(row => row._id === _id)
 
-  public findOne(args: Partial<T>) {
-    return this.find(args)[0]
-  }
+        if (candidate === undefined) {
+            throw new Error("No record found")
+        }
 
-  public findAll() {
-    return this
-      .getTable()
-      .map(row => new Instance<T>(this.schema, row, {isNew: false}))
-  }
+        return new Instance<T>(this.schema, candidate, {
+            isNew: false
+        })
+    }
 
-  // Hunters
-  public hunt(args: Partial<T>) {
-    this.find(args).map(instance => instance.delete())
-    return "Successful hunt!"
-  }
+    public find(args: Partial<T>) {
+        const table = this.getTable()
+        const keys = Object.keys(args) as unknown as Array<keyof T>
 
-  public huntOne(args: Partial<T>) {
-    this.findOne(args).delete()
-    return "Successful single hunt!"
-  }
-  
-  public huntAll() {
-    this.findAll().map(instance => instance.delete())
-    return "Successful absolute hunt!"
-  }
+        return table
+            .filter(row => keys.every(key => ObjectUtils.nestedCheck(row, key, args[key])))
+            .map(row => new Instance<T>(this.schema, row, {isNew: false}))
+    }
+
+    public findOne(args: Partial<T>) {
+        return this.find(args)[0]
+    }
+
+    public findAll() {
+        return this
+            .getTable()
+            .map(row => new Instance<T>(this.schema, row, {isNew: false}))
+    }
+
+    // Hunters
+    public hunt(args: Partial<T>) {
+        this.find(args).map(instance => instance.delete())
+        return "Successful hunt!"
+    }
+
+    public huntOne(args: Partial<T>) {
+        this.findOne(args).delete()
+        return "Successful single hunt!"
+    }
+
+    public huntAll() {
+        this.findAll().map(instance => instance.delete())
+        return "Successful absolute hunt!"
+    }
 }
