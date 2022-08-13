@@ -1,4 +1,4 @@
-import {Column, Document, Model, Schema, TinyTable} from "../mod.ts"
+import {Column, Document, Model, Schema, TinyTable} from "../tinydb.ts"
 
 @TinyTable("users")
 class User {
