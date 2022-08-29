@@ -30,7 +30,6 @@ export class Instance<T extends { _id: string }> {
     }
 
     public toJSON(): T {
-        console.log(this._fields)
         return this._fields
     }
 
