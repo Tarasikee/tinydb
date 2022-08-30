@@ -4,7 +4,7 @@ export function ErrorHandler(error: Error) {
     try {
         message = JSON.parse(error.message).message
         hint = JSON.parse(error.message).hint
-    } catch (e) {
+    } catch (_) {
         message = error.message
         hint = "No hint provided"
     }
