@@ -1,6 +1,9 @@
 import {Column, Document, Model, Schema, TinyTable} from "../tinydb.ts"
 
-@TinyTable("users")
+@TinyTable({
+    name: "users",
+    url: "database/test/"
+})
 class User {
     @Column({
         type: "string",
@@ -29,18 +32,6 @@ class User {
         }
     })
     settings!: Record<string, unknown>
-
-    // @Column({
-    //     allowNull: true,
-    //     default: [],
-    //     type: "model"
-    // })
-    // friends!: string[]
-
-    // @Column({
-    //     type: "model"
-    // })
-    // profile!: User
 }
 
 export type userDocument = User & Document

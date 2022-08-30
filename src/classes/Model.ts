@@ -7,7 +7,7 @@ export class Model<T extends { _id: string }> {
     }
 
     private getTable(): T[] {
-        const url = `./database/${this.schema.name}.json`
+        const url = `${this.schema.url}${this.schema.name}.json`
         return FileUtils.readJson<T>(url)
     }
 
@@ -50,6 +50,11 @@ export class Model<T extends { _id: string }> {
     }
 
     // Hunters
+    public huntById(_id: string) {
+        this.findById(_id).delete()
+        return "Successful hunt!"
+    }
+
     public hunt(args: Partial<T>) {
         this.find(args).map(instance => instance.delete())
         return "Successful hunt!"

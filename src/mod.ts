@@ -11,4 +11,4 @@ export {Column, getFormat, TinyTable} from "./decorators/mod.ts"
 export type {OptionTypes, ColumnProps, ColumnRules, Document} from "./interfaces/mod.ts"
 
 // Errors
-export { ErrorWithHint } from "./errors/mod.ts"
+export { ErrorWithHint, ErrorHandler } from "./errors/mod.ts"

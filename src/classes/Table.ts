@@ -1,8 +1,8 @@
 import {FileUtils} from "../mod.ts"
 
 export class Table {
-    public static init(name: string) {
-        const url = `./database/${name}.json`
+    public static init(name: string, dir_url: string) {
+        const url = `${dir_url}${name}.json`
 
         try {
             const isExists = FileUtils.isFileExists(url)
@@ -11,7 +11,7 @@ export class Table {
                 return this
             }
 
-            FileUtils.createOrCheckDir("./database")
+            FileUtils.createOrCheckDir(dir_url)
             FileUtils.writeJson(url, [])
             return this
         } catch (e) {
@@ -19,8 +19,8 @@ export class Table {
         }
     }
 
-    public static nuke(name: string) {
-        const url = `./database/${name}.json`
+    public static nuke(name: string, dir_url: string) {
+        const url = `${dir_url}${name}.json`
 
         try {
             FileUtils.writeJson(url, [])

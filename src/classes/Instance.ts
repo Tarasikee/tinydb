@@ -20,12 +20,12 @@ export class Instance<T extends { _id: string }> {
     }
 
     private getTable(): T[] {
-        const url = `./database/${this._schema.name}.json`
+        const url = `${this._schema.url}${this._schema.name}.json`
         return FileUtils.readJson<T>(url)
     }
 
     private writeTable(table: T[]) {
-        const url = `./database/${this._schema.name}.json`
+        const url = `${this._schema.url}${this._schema.name}.json`
         FileUtils.writeJson(url, [...table])
     }
 

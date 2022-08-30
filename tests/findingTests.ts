@@ -149,10 +149,5 @@ export const findingTests = () => {
 
             assertStrictEquals(users.length, 0)
         })
-
-        await t.step("Clear DB", () => {
-            const message = userModel.huntAll()
-            assertStrictEquals("Successful absolute hunt!", message)
-        })
     })
 }

@@ -34,8 +34,7 @@ export const creationTests = () => {
 
                     users.map(user => user.save())
                 },
-                Error,
-                "Message: name must be unique"
+                Error
             )
         })
 
@@ -179,11 +178,6 @@ export const creationTests = () => {
             )
 
             user.delete()
-        })
-
-        await t.step("Clear DB", () => {
-            const message = userModel.huntAll()
-            assertStrictEquals("Successful absolute hunt!", message)
         })
     })
 }

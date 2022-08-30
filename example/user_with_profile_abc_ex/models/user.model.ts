@@ -1,6 +1,9 @@
-import {TinyTable, Schema, Column, Model, Document} from "https://deno.land/x/tinydb@v2.0.1/src/mod.ts"
+import {TinyTable, Schema, Column, Model, Document} from "../../../src/mod.ts"
 
-@TinyTable("users")
+@TinyTable({
+    name: "users",
+    url: "database/example1/"
+})
 class User {
     @Column({
         type: "string",
