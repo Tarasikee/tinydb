@@ -169,7 +169,7 @@ const allUsers = userModel.findAll()
 #### Note:
 
 Both `find` and `findOne` methods can search by deeply nested objects. Here is
-an ![example](https://github.com/Tarasikee/tinydb/blob/master/tests/findingTests.ts).
+an [example](https://github.com/Tarasikee/tinydb/blob/master/tests/findingTests.ts).
 But be careful because it can affect performance.
 
 ### Update:
