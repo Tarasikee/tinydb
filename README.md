@@ -108,7 +108,7 @@ Then you can create model with ```new Model``` function.
 # CRUD
 
 CRUD is provided by `Model` class itself. Create and retrieve methods return type of `Instance` class,
-that can be converted to JSON with .toJSON() method.
+that can be converted to JSON with `.toJSON()` method.
 
 ### Create:
 
@@ -169,7 +169,7 @@ const allUsers = userModel.findAll()
 #### Note:
 
 Both `find` and `findOne` methods can search by deeply nested objects. Here is
-an [example]("https://github.com/Tarasikee/tinydb/blob/master/tests/findingTests.ts#L41").
+an ![example](https://github.com/Tarasikee/tinydb/blob/master/tests/findingTests.ts).
 But be careful because it can affect performance.
 
 ### Update:
