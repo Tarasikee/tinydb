@@ -1,12 +1,12 @@
 import {userModel} from "./userInitiale.ts"
-import {faker, assertStrictEquals, format} from "../deps/deps.ts"
+import {faker, assertStrictEquals} from "../deps/deps.ts"
 
 export const findingTests = () => {
     return Deno.test("Finding tests", async (t) => {
         await t.step("Create 10 users for testing purposes", () => {
             const users = [...Array(10).keys()].map(() => userModel.create({
                 name: faker.name.firstName(),
-                birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                birthday: new Date(faker.date.past()).toISOString(),
                 isAdmin: faker.random.boolean(),
                 settings: {
                     theme: faker.random.arrayElement(["light", "dark", "system"]),

@@ -1,7 +1,7 @@
 import {Application, Context, HttpException} from "https://deno.land/x/abc@v1.3.3/mod.ts"
 import {logger} from "https://deno.land/x/abc@v1.3.3/middleware/logger.ts"
-import {userDocument, userModel} from "./models/user.model.ts"
 import {Status} from "https://deno.land/std@0.152.0/http/http_status.ts"
+import {userDocument, userModel} from "./models/user.model.ts"
 import {ErrorHandler} from "../../src/errors/ErrorHandler.ts"
 
 const app = new Application()
@@ -37,6 +37,13 @@ const findOne = (ctx: Context) => {
     ctx.json(user)
 }
 
+const update = async (ctx: Context) => {
+    const body = await ctx.body
+    const {id} = ctx.params
+    const user = userModel.findByIdAndUpdate(id, body as userDocument)
+    ctx.json(user)
+}
+
 const deleteOne = (ctx: Context) => {
     const {id} = ctx.params
     const message = userModel.huntById(id)
@@ -46,6 +53,7 @@ const deleteOne = (ctx: Context) => {
 app
     .get("/users", findAll)
     .get("/users/:id", findOne)
+    .put("/users/:id", update)
     .post("/users", create)
     .delete("/users/:id", deleteOne)
     .start({port: 8080})

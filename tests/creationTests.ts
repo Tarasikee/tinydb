@@ -1,12 +1,12 @@
 import {userDocument, userModel} from "./userInitiale.ts"
-import {faker, format, assertStrictEquals, assertThrows, assertObjectMatch} from "../deps/deps.ts"
+import {faker, assertStrictEquals, assertThrows, assertObjectMatch} from "../deps/deps.ts"
 
 export const creationTests = () => {
     return Deno.test("Creation tests", async (t) => {
         await t.step("Create user with all fields", () => {
             const user = userModel.create({
                 name: faker.name.firstName(),
-                birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                birthday: new Date(faker.date.past()).toISOString(),
                 isAdmin: faker.random.boolean(),
                 settings: {
                     theme: faker.random.arrayElement(["light", "dark", "system"]),
@@ -23,7 +23,7 @@ export const creationTests = () => {
                 () => {
                     const users = [...Array(800).keys()].map(() => userModel.create({
                         name: faker.name.firstName(),
-                        birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                        birthday: new Date(faker.date.past()).toISOString(),
                         isAdmin: faker.random.boolean(),
                         settings: {
                             theme: faker.random.arrayElement(["light", "dark", "system"]),
@@ -48,7 +48,7 @@ export const creationTests = () => {
                 () => {
                     const user = userModel.create({
                         name: 123,
-                        birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                        birthday: new Date(faker.date.past()).toISOString(),
                         isAdmin: faker.random.boolean(),
                         settings: {
                             theme: faker.random.arrayElement(["light", "dark", "system"]),
@@ -86,7 +86,7 @@ export const creationTests = () => {
                 () => {
                     const user = userModel.create({
                         name: faker.name.firstName(),
-                        birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                        birthday: new Date(faker.date.past()).toISOString(),
                         isAdmin: 123,
                         settings: {
                             theme: faker.random.arrayElement(["light", "dark", "system"]),
@@ -105,7 +105,7 @@ export const creationTests = () => {
                 () => {
                     const user = userModel.create({
                         name: faker.name.firstName(),
-                        birthday: format(faker.date.past(), "yyyy-MM-dd"),
+                        birthday: new Date(faker.date.past()).toISOString(),
                         isAdmin: faker.random.boolean(),
                         settings: []
                     } as unknown as userDocument)
@@ -166,7 +166,7 @@ export const creationTests = () => {
                         {
                             _id: "123",
                             name: "John",
-                            birthday: "2000-01-29",
+                            birthday: new Date("2000-01-29").toISOString(),
                             isAdmin: true,
                             settings: {
                                 theme: "darcula",

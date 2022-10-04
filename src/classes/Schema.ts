@@ -27,6 +27,8 @@ export class Schema {
             .filter(key => key[0] !== "_")
             .map(key => ({name: key, options: getFormat(instance, key)}))
 
-        return new Schema(instance["_tableName"], instance["_dir_url"], options)
+        return new Schema(instance["_tableName"], instance["_dir_url"], [...options, {
+            name: "_id", options: {type: "string", unique: true}
+        }])
     }
 }

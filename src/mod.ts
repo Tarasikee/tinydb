@@ -2,7 +2,7 @@
 export {Model, Instance, Schema, Table} from "./classes/mod.ts"
 
 // Utils
-export {FileUtils, ObjectUtils, ColumnsUtils} from "./utils/mod.ts"
+export {FileUtils, ObjectUtils, ColumnsChecks} from "./utils/mod.ts"
 
 // Decorators
 export {Column, getFormat, TinyTable} from "./decorators/mod.ts"

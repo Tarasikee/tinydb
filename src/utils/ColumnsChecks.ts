@@ -1,8 +1,7 @@
 import {ColumnRules, OptionTypes} from "../interfaces/mod.ts"
 import {ErrorWithHint, ErrorWithMessage} from "../errors/mod.ts"
-import {parse} from "../../deps/deps.ts"
 
-export class ColumnsUtils<T> {
+export class ColumnsChecks<T> {
     constructor(
         private columnRules: ColumnRules[] = [],
         private table: Array<T> = [],
@@ -16,7 +15,7 @@ export class ColumnsUtils<T> {
 
         if (checkType === "date") {
             try {
-                return parse(String(value), "yyyy-MM-dd")
+                return new Date(String(value)).toISOString()
             } catch (_) {
                 throw new ErrorWithMessage(`${columnName} must be date`)
             }

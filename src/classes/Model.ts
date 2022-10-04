@@ -49,6 +49,29 @@ export class Model<T extends { _id: string }> {
             .map(row => new Instance<T>(this.schema, row, {isNew: false}))
     }
 
+    //Updaters
+    public findByIdAndUpdate(_id: string, args: Partial<T>) {
+        const instance = this.findById(_id)
+        instance.fields = {...instance.fields, ...args}
+        instance.save()
+        return instance
+    }
+
+    public findAndUpdate(args: Partial<T>, update: Partial<T>) {
+        this.find(args).map(instance => {
+            instance.fields = {...instance.fields, ...update}
+            instance.save()
+        })
+        return "Successful update!"
+    }
+
+    public findOneAndUpdate(args: Partial<T>, update: Partial<T>) {
+        const instance = this.findOne(args)
+        instance.fields = {...instance.fields, ...update}
+        instance.save()
+        return instance
+    }
+
     // Hunters
     public huntById(_id: string) {
         this.findById(_id).delete()

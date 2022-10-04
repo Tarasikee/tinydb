@@ -8,9 +8,8 @@ export function getFormat(target: unknown, propertyKey: string) {
 }
 
 export function Column(options: ColumnProps) {
-    const optionsProxy = options.allowNull === undefined
+    return Reflect.metadata(formatMetadataKey, options.allowNull === undefined
         ? {...options, allowNull: false}
         : {...options, allowNull: true}
-
-    return Reflect.metadata(formatMetadataKey, optionsProxy)
+    )
 }
